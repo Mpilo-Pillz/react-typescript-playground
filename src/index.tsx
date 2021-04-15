@@ -4,16 +4,17 @@ import ReactDOM from "react-dom";
 interface AppProps {
   color: string;
 }
-// interface AppState {
-//     counter: number
-// }
-class App extends React.Component<AppProps> {
+interface AppState {
+  counter: number;
+}
+class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
 
     this.state = { counter: 0 };
   }
   /*
+  addApp starte as a property to fix the below
   //state = { counter: 0 }; defineing properites here and in the constructor is not the smae
   in ts as it in in JS
   so you have to chose between initializing the property way of initialising a state object
