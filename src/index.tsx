@@ -1,53 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import { App } from "./components/App";
+import { reducers } from "./reducers";
 
-interface AppProps {
-  color: string;
-}
-interface AppState {
-  counter: number;
-}
+const store = createStore(reducers, applyMiddleware(thunk));
 
-// const App = (props: AppProps): JSX.Element => {
-//   return <div>{props.color}</div>;
-// };
-class App extends React.Component<AppProps> {
-  //   constructor(props: AppProps) {
-  //     super(props);
-
-  //     this.state = { counter: 0 };
-  //   }
-  /*
-  addApp starte as a property to fix the below
-  //state = { counter: 0 }; defineing properites here and in the constructor is not the smae
-  in ts as it in in JS
-  so you have to chose between initializing the property way of initialising a state object
-  or chose the constructor way of initializing a state <object data. In JS we dont have to worry abou this" type="" className=""></object>
-*/
-
-  state = { counter: 0 };
-
-  onIncrement = (): void => {
-    console.log("increase" + this.state.counter);
-
-    this.setState({ counter: this.state.counter + 1 });
-  };
-
-  onDecrement = (): void => {
-    console.log("decrease" + this.state.counter);
-
-    this.setState({ counter: this.state.counter - 1 });
-  };
-
-  render() {
-    return (
-      <div>
-        <button onClick={this.onIncrement}>Increment</button>
-        <button onClick={this.onDecrement}>Decrement</button>
-        {this.state.counter}
-      </div>
-    );
-  }
-}
-
-ReactDOM.render(<App color="purple" />, document.querySelector("#root"));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector("#root")
+);
