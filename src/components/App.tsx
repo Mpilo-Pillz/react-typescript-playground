@@ -47,7 +47,7 @@ class _App extends React.Component<AppProps, AppState> {
   render() {
     return (
       <div>
-        <button onClick={this.onButtonClick}>Fecth</button>
+        <button onClick={this.onButtonClick}>Fecth Items</button>
         {this.state.fetching ? "LOADING" : null}
         {this.renderList()}
       </div>
